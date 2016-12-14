@@ -3,6 +3,8 @@ var app = express();
 const fs =require('fs');
 const hbs = require('hbs');
 
+const port = process.env.PORT || 3000;
+
 app.set('view engine', 'hbs');
 
 hbs.registerPartials(__dirname + '/views/partials')
@@ -15,10 +17,11 @@ app.use(function (req, res, next){
   next();
 });
 
+/*
 app.use(function(req, res, next){
   res.render('main.hbs');
 });
-
+*/
 app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('getcurrentYear', function(){
@@ -51,6 +54,6 @@ app.get('/error',function(req, res){
   res.send("<h1>This is an ERROR</h1>");
 });
 
-app.listen(3000, function(){
-  console.log("The server is running...");
+app.listen(port, function(){
+  console.log(`Server is up on port ${port}`);
 });
